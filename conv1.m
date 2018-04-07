@@ -19,9 +19,21 @@
 ## @seealso{}
 ## @end deftypefn
 
-## Author: Chris <chris@chris-XPS>
+## Author: Christian Lascsak
 ## Created: 2018-04-06
 
 function [retval] = conv1 (f, g)
-    
+    sum = [];
+    m = length(f);
+    for n = 1:m
+      intSum = 0;
+     for k = 1:n
+       intSum = intSum + f(n) * g(n-k)
+     end;
+     sum (end+1) = intsum;
+     
+   end;
+   retval = sum;
+           
+     
 endfunction
