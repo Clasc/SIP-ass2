@@ -6,12 +6,12 @@ function [retval] = conv1 (f, g)
     m = length(f);
     for n = 1:m
       intSum = 0;
-      n;
-      for k = 2:n
-       k;
+      disp(n);
+      for k = 1:n-1
+       disp(k);
        intSum = intSum + f(n) * g(n-k);
       end;
-     sum  = (sum, intSum);
+     sum  = [sum, intSum];
      
    end;
    retval = sum;
