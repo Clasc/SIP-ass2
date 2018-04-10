@@ -23,17 +23,14 @@ function [retval] = conv1 (f, g)
       endlength = length(f);
     endif;
     
-    disp (endlength);
-    for n = 1 : lf+lg-1
+    g = flip(g);
+    disp(g);
+    
+    for n = 1 : endlength
       intSum = 0;
-      for k = 0:n;
-        disp("f(k)=");
-        disp(f(k+1));
-        disp("g(endlength - k)=");
-        disp(g(endlength - k));
-       intSum = intSum + f(k+1) * g(k+1);
-       disp(intSum);
-      end;
+      for k = 1:n
+       intSum = intSum + f(k) * g(endlength - k + 1);
+       end;
      sum  = [sum, intSum];
      
    end;
