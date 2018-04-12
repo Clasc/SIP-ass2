@@ -1,5 +1,5 @@
 ## Author: Christian Lascsak
-## Created: 2018-04-06
+## 01363742
 
 function [retval] = conv1 (f, g)
     sum = [];
