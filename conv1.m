@@ -5,31 +5,18 @@ function [retval] = conv1 (f, g)
     sum = [];
     lf = length(f);
     lg = length(g);
-    endlength = 0;
-    if(lf>lg)
-      endlength = lf;
-      dif = lf - lg;
-      for i = 1:dif
-        g = [g , 0]
-      end;
-      
-    elseif (lg>lf)
-      endlength = lg;
-      dif = lg - lf;
-      for i = 1:dif
-        f = [f, 0]
-      end;
-      else
-      endlength = length(f);
-    endif;
     
-    g = flip(g);
-    disp(g);
+    endlength  = lg + lf -1;
+   
+ 
     
     for n = 1 : endlength
       intSum = 0;
-      for k = 1:n
-       intSum = intSum + f(k) * g(endlength - k + 1);
+      for k = 1:length(f)
+        if(n-k+1 <=0 || n-k+1 > length(g))
+          continue;
+        endif;
+       intSum = intSum + f(k) * g(n-k+1);
        end;
      sum  = [sum, intSum];
      
