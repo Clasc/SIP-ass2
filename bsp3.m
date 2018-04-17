@@ -1,7 +1,7 @@
 original = imread('343a.tif');
 
 figure,imshow(original,[]);
-lap = [0,1,0;1,-4,1;0,1,0] * -1; #sieht schärfer aus
+lap = [0,1,0;1,-4,1;0,1,0] * -1; #sieht schaerfer aus
 
 #Laplace filter
 laplacian = conv2(original, lap, "same");
