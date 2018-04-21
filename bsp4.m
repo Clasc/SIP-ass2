@@ -1,3 +1,10 @@
+#bsp3
+#Christian Lascsak
+#01363742
+
+close all;
+clear all;
+
 Im424a=imread('424a.png');
 Im429a=imread('429a.png');
 
