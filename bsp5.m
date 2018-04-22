@@ -4,7 +4,7 @@
 
 close all;
 clear all;
-
+img = imread("429a.png");
 [m,n,z] = size(img);
 D0 = 0.03; #konstante size für gaussian filter
 u = 0:(m-1);
@@ -17,6 +17,7 @@ indexv = find(v > n/2);
 v(indexu) = v(indexu) - n; 
  #v = v.- v/2;
 [V, U]= meshgrid(v, u);
+
 
 
 
