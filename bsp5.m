@@ -6,11 +6,15 @@ close all;
 clear all;
 
 i=1;
-img = imread("429a.png");
+img = imread('blurry-moon.tif');
 [m,n,z] = size(img);
-D0 = 0.03; #konstante size für gaussian filter
+D0 = 0.05; #konstante size für gaussian filter
 u = 0:(m-1);
 v = 0:(n-1);
+
+imgMin = min(min(abs(img)));
+imgMax = max(max(abs(img)));
+
 
 indexu = find(u > m/2);
 u(indexu) = u(indexu) - m; 
@@ -21,31 +25,32 @@ v(indexv) = v(indexv) - n;  #flip indices around the axes
 [V, U]= meshgrid(v, u);
 
 F = fft2(img);
-F2 = abs(F);
-F2 = log(1+F2);
-F2 = fftshift(F2);
 
-subplot(2,2,i++),imshow(F2, []);
+subplot(2,3,i++),imshow(F, [imgMin imgMax]);
 title("Fourier");
 
 D = sqrt(U.^2 + V.^2);
 
 H = exp((-1)*(D.^2)/2*D0^2); #create lowpassfilter
 
-blurred = H.* F2; 
+blurred = H.* F; 
 
-usmask = F2 - blurred; #unsharpening mask created
+usmask = F.- blurred; #unsharpening mask created
 
-sharpened = F2 + usmask; 
+sharpened = F.+ usmask; 
 
 sharpened = real(ifft2(sharpened)); #real part of inverse FFT
-sharpened = log(1+sharpened); 
+%sharpened = log(1+sharpened); 
 
 
-subplot(2,2,i++),imshow(usmask, []);
+subplot(2,3,i++),imshow(usmask, [imgMin imgMax]);
 title("Unsharpening mask");
 
-subplot(2,2,i++),imshow(img, []);
+subplot(2,3,i++),imshow(img, [imgMin imgMax]);
 title("original");
-subplot(2,2,i++),imshow(sharpened, []);
-title("Sharpened by unsharpening mask");
+
+subplot(2,3,i++), imshow(F.-usmask, [imgMin imgMax]);
+title("Boosted frequencies:\n original - unsharp mask.");
+
+subplot(2,3,i++),imshow(sharpened, [imgMin imgMax]);
+title("Sharpened by \n unsharpening mask");
